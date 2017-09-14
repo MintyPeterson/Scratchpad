@@ -1,0 +1,23 @@
+page-home {
+  ion-textarea {
+    &.input-ios {
+      top: $toolbar-ios-height;
+    }
+    &.input-md {
+      top: $toolbar-md-height;
+    }
+    &.input-wp {
+      top: $toolbar-wp-height;
+    }
+    position: absolute;
+    bottom: 0;
+  }
+  textarea {
+    &.text-input {
+      height: 100%;
+      margin: 0;
+      padding: 16px;
+      width: 100%;
+    }
+  }
+}
