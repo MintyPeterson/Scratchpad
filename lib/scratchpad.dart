@@ -12,7 +12,7 @@ class Scratchpad extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         brightness: Brightness.light,
-        primarySwatch: Colors.indigo
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
