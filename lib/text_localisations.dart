@@ -40,7 +40,7 @@ class TextLocalisations {
 
   String get clearScratchpadDescription {
     return _localisedValues[locale.languageCode]![
-        'clearScratchpadDescription']!;
+      'clearScratchpadDescription']!;
   }
 
   String get cancelButton {
@@ -87,7 +87,7 @@ class TextLocalisationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      TextLocalisations.languages().contains(locale.languageCode);
+    TextLocalisations.languages().contains(locale.languageCode);
 
   @override
   Future<TextLocalisations> load(Locale locale) {

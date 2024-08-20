@@ -28,7 +28,7 @@ class _NotesPageState extends State<NotesPage> {
     try {
       final directory = await getApplicationDocumentsDirectory();
       return File(
-          '${directory.path}${Platform.pathSeparator}.scratchpad${Platform.pathSeparator}notes.txt');
+        '${directory.path}${Platform.pathSeparator}.scratchpad${Platform.pathSeparator}notes.txt');
     } on MissingPluginException {
       // Do nothing. The environment does not support writing files to disk
       // using the path_provider package.
@@ -70,7 +70,7 @@ class _NotesPageState extends State<NotesPage> {
 
       // Move the cursor to the end of the text field.
       textFieldController.selection = TextSelection.fromPosition(
-          TextPosition(offset: textFieldController.text.length));
+        TextPosition(offset: textFieldController.text.length));
 
       textFieldController.addListener(_onTextFieldChanged);
     });
@@ -97,7 +97,7 @@ class _NotesPageState extends State<NotesPage> {
               builder: (BuildContext context) => AlertDialog(
                 title: Text(TextLocalisations.of(context).clearScratchpadTitle),
                 content: Text(
-                    TextLocalisations.of(context).clearScratchpadDescription),
+                  TextLocalisations.of(context).clearScratchpadDescription),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
@@ -119,86 +119,84 @@ class _NotesPageState extends State<NotesPage> {
             ),
           ),
           PopupMenuButton<NotesPageOverflowMenu>(
-              onSelected: (NotesPageOverflowMenu item) {
-                switch (item) {
-                  case NotesPageOverflowMenu.copy:
-                    {
-                      Clipboard.setData(
-                          ClipboardData(text: textFieldController.text));
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            content: Text(TextLocalisations.of(context)
-                                .notesCopiedMessage)),
-                      );
-                    }
-                    break;
-                  case NotesPageOverflowMenu.paste:
-                    {
-                      Clipboard.getData('text/plain').then((value) {
-                        String text = value?.text ?? '';
-                        if (textFieldController.text.isNotEmpty) {
-                          textFieldController.text =
-                              textFieldController.text + text;
-                        } else {
-                          textFieldController.text = text;
-                        }
-                      });
-                    }
-                    break;
-                  case NotesPageOverflowMenu.removeEmptyLines:
-                    {
-                      // Remove empty lines and those that only contain whitespace.
-                      textFieldController.text = textFieldController.text
-                          .replaceAll(
-                              RegExp(r'^[ \t]*\n', multiLine: true), '');
-                    }
-                    break;
-                  case NotesPageOverflowMenu.trimWhitespace:
-                    {
-                      // Remove start and end spacing.
-                      textFieldController.text = textFieldController.text
-                          .replaceAll(RegExp(r'^ +| +$', multiLine: true), '');
-                      // Replace multiple spaces with a single space.
-                      textFieldController.text = textFieldController.text
-                          .replaceAll(RegExp(r' +', multiLine: true), ' ');
-                    }
-                    break;
-                }
-              },
-              itemBuilder: (BuildContext context) =>
-                  <PopupMenuEntry<NotesPageOverflowMenu>>[
-                    PopupMenuItem<NotesPageOverflowMenu>(
-                      enabled: false,
-                      textStyle: const TextStyle(fontSize: 14.0),
-                      child:
-                          Text(TextLocalisations.of(context).clipboardMenuItem),
-                    ),
-                    PopupMenuItem<NotesPageOverflowMenu>(
-                      value: NotesPageOverflowMenu.copy,
-                      child: Text(TextLocalisations.of(context).copyMenuItem),
-                    ),
-                    PopupMenuItem<NotesPageOverflowMenu>(
-                      value: NotesPageOverflowMenu.paste,
-                      child: Text(TextLocalisations.of(context).pasteMenuItem),
-                    ),
-                    const PopupMenuDivider(),
-                    PopupMenuItem<NotesPageOverflowMenu>(
-                      enabled: false,
-                      textStyle: const TextStyle(fontSize: 14.0),
-                      child: Text(
-                          TextLocalisations.of(context).formattingMenuItem),
-                    ),
-                    PopupMenuItem<NotesPageOverflowMenu>(
-                      value: NotesPageOverflowMenu.removeEmptyLines,
-                      child: Text(TextLocalisations.of(context)
-                          .removeEmptyLinesMenuItem),
-                    ),
-                    PopupMenuItem<NotesPageOverflowMenu>(
-                      value: NotesPageOverflowMenu.trimWhitespace,
-                      child: Text(
-                          TextLocalisations.of(context).trimWhitespaceMenuItem),
-                    ),
-                  ])
+            onSelected: (NotesPageOverflowMenu item) {
+              switch (item) {
+                case NotesPageOverflowMenu.copy:
+                  {
+                    Clipboard.setData(
+                      ClipboardData(text: textFieldController.text));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(TextLocalisations.of(context)
+                        .notesCopiedMessage)),
+                    );
+                  }
+                  break;
+                case NotesPageOverflowMenu.paste:
+                  {
+                    Clipboard.getData('text/plain').then((value) {
+                      String text = value?.text ?? '';
+                      if (textFieldController.text.isNotEmpty) {
+                        textFieldController.text =
+                          textFieldController.text + text;
+                      } else {
+                        textFieldController.text = text;
+                      }
+                    });
+                  }
+                  break;
+                case NotesPageOverflowMenu.removeEmptyLines:
+                  {
+                    // Remove empty lines and those that only contain whitespace.
+                    textFieldController.text = textFieldController.text
+                      .replaceAll(RegExp(r'^[ \t]*\n', multiLine: true), '');
+                  }
+                  break;
+                case NotesPageOverflowMenu.trimWhitespace:
+                  {
+                    // Remove start and end spacing.
+                    textFieldController.text = textFieldController.text
+                      .replaceAll(RegExp(r'^ +| +$', multiLine: true), '');
+                    // Replace multiple spaces with a single space.
+                    textFieldController.text = textFieldController.text
+                      .replaceAll(RegExp(r' +', multiLine: true), ' ');
+                  }
+                  break;
+              }
+            },
+            itemBuilder: (BuildContext context) =>
+              <PopupMenuEntry<NotesPageOverflowMenu>>[
+                PopupMenuItem<NotesPageOverflowMenu>(
+                  enabled: false,
+                  textStyle: const TextStyle(fontSize: 14.0),
+                  child: Text(TextLocalisations.of(context).clipboardMenuItem),
+                ),
+                PopupMenuItem<NotesPageOverflowMenu>(
+                  value: NotesPageOverflowMenu.copy,
+                  child: Text(TextLocalisations.of(context).copyMenuItem),
+                ),
+                PopupMenuItem<NotesPageOverflowMenu>(
+                  value: NotesPageOverflowMenu.paste,
+                  child: Text(TextLocalisations.of(context).pasteMenuItem),
+                ),
+                const PopupMenuDivider(),
+                PopupMenuItem<NotesPageOverflowMenu>(
+                  enabled: false,
+                  textStyle: const TextStyle(fontSize: 14.0),
+                  child:Text(
+                    TextLocalisations.of(context).formattingMenuItem),
+                ),
+                PopupMenuItem<NotesPageOverflowMenu>(
+                  value: NotesPageOverflowMenu.removeEmptyLines,
+                  child: Text(TextLocalisations.of(context)
+                    .removeEmptyLinesMenuItem),
+                ),
+                PopupMenuItem<NotesPageOverflowMenu>(
+                  value: NotesPageOverflowMenu.trimWhitespace,
+                  child: Text(
+                    TextLocalisations.of(context).trimWhitespaceMenuItem),
+                ),
+              ]
+          )
         ],
       ),
       body: GestureDetector(
